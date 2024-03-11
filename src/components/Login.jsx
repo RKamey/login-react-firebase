@@ -11,6 +11,26 @@ export const Login = () => {
 
     const [registrando, setRegistrando] = useState(false)
 
+    const functAuth = async(e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        if (registrando) {
+            try {
+                await createUserWithEmailAndPassword(auth, email, password)
+            } catch (error) {
+                alert("La contraseña debe tener más de 8 caracteres y el email debe ser válido")
+            }
+        } else {
+            try {
+                await signInWithEmailAndPassword(auth, email, password)
+            } catch (error) {
+                alert("Usuario o contraseña incorrecta")
+            }
+        }
+    }
+
   return (
     <div className='container'>
         <div className='row'>
@@ -19,9 +39,9 @@ export const Login = () => {
                 <div className="wrapper">
                     <div className="card card-body">
                         <img src={ImageProfile} alt="Imagen del Perfil" className='style-profile' />
-                        <form>
-                            <input type="text" placeholder='Ingresar Email' className='input-style'/>
-                            <input type="password" placeholder='Ingresar contraseña' className='input-style' />
+                        <form onSubmit={functAuth}>
+                            <input type="text" placeholder='Ingresar Email' className='input-style' id='email'/>
+                            <input type="password" placeholder='Ingresar contraseña' className='input-style' id='password' />
                             <button className='btn-form'>{ registrando ? "Regístrate" : "Inicia Sesión" }</button>
                         </form>
                         <h4 className='text'>{registrando ? "Si ya tienes cuenta" : "No tienes cuenta"}<button className='btn-switch' onClick={()=>setRegistrando(!registrando)}>{registrando ? "Inicia sesíon" : "Regístrate"}</button> </h4>
