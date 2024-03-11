@@ -43,3 +43,15 @@
 .btn-form:hover {
     background-color: #033a8c;
 }
+.text {
+    font-size: 15px;
+    color: slategray;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 5px;
+}
+.btn-switch {
+    background-color: none;
+    border: none;
+    text-decoration: underline;
+    color: blue;
+}
