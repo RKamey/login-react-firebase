@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Imagen from '../assets/loginvector.jpg'
 import ImageProfile from '../assets/profile.png'
+import GoogleIcon from '../assets/google-icon.png'
 
 import appFirebase from '../credentials'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
@@ -55,7 +56,7 @@ export const Login = () => {
                             <button className='btn-form'>{ registrando ? "Regístrate" : "Inicia Sesión" }</button>
                         </form>
                         <button className='btn-form btn-google' onClick={signInWithGoogle}>
-                            <img src="../src/assets/google-icon.png" alt="Iniciar sesión con Google" className='google-icon' />
+                            <img src={GoogleIcon} alt="Iniciar sesión con Google" className='google-icon' />
                             <span className='google-text'>Iniciar sesión con Google</span>
                         </button>
                         <h4 className='text'>{registrando ? "Si ya tienes cuenta" : "No tienes cuenta"}<button className='btn-switch' onClick={()=>setRegistrando(!registrando)}>{registrando ? "Inicia sesíon" : "Regístrate"}</button> </h4>
