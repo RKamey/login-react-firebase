@@ -38,11 +38,16 @@
     padding: 15px;
     border-width: 0px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .btn-form:hover {
     background-color: #033a8c;
 }
+
 .text {
     font-size: 15px;
     color: slategray;
@@ -54,4 +59,15 @@
     border: none;
     text-decoration: underline;
     color: blue;
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 20px;
+}
+
+.google-text {
+    margin-left: 40px;
 }

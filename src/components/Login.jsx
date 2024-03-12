@@ -4,8 +4,10 @@ import Imagen from '../assets/loginvector.jpg'
 import ImageProfile from '../assets/profile.png'
 
 import appFirebase from '../credentials'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
 const auth = getAuth(appFirebase);
+const googleProvider = new GoogleAuthProvider(); 
 
 export const Login = () => {
 
@@ -31,6 +33,14 @@ export const Login = () => {
         }
     }
 
+    const signInWithGoogle = async () => {
+        try {
+            await signInWithPopup(auth, googleProvider);
+        } catch (error) {
+            alert("Error al iniciar sesión con Google")
+        }
+    }
+
   return (
     <div className='container'>
         <div className='row'>
@@ -44,6 +54,10 @@ export const Login = () => {
                             <input type="password" placeholder='Ingresar contraseña' className='input-style' id='password' />
                             <button className='btn-form'>{ registrando ? "Regístrate" : "Inicia Sesión" }</button>
                         </form>
+                        <button className='btn-form btn-google' onClick={signInWithGoogle}>
+                            <img src="../src/assets/google-icon.png" alt="Iniciar sesión con Google" className='google-icon' />
+                            <span className='google-text'>Iniciar sesión con Google</span>
+                        </button>
                         <h4 className='text'>{registrando ? "Si ya tienes cuenta" : "No tienes cuenta"}<button className='btn-switch' onClick={()=>setRegistrando(!registrando)}>{registrando ? "Inicia sesíon" : "Regístrate"}</button> </h4>
                     </div>
                 </div>
