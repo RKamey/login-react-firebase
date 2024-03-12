@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import Imagen from '../assets/loginvector.jpg'
 import ImageProfile from '../assets/profile.png'
 import GoogleIcon from '../assets/google-icon.png'
+import GithubIcon from '../assets/github-icon.png'
 
 import appFirebase from '../credentials'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const auth = getAuth(appFirebase);
 const googleProvider = new GoogleAuthProvider(); 
+const githubProvider = new GithubAuthProvider();
 
 export const Login = () => {
 
@@ -42,6 +44,14 @@ export const Login = () => {
         }
     }
 
+    const signInWithGithub = async () => {
+        try {
+            await signInWithPopup(auth, githubProvider);
+        } catch (error) {
+            alert("Error al iniciar sesión con Github")
+        }
+    }
+
   return (
     <div className='container'>
         <div className='row'>
@@ -55,11 +65,18 @@ export const Login = () => {
                             <input type="password" placeholder='Ingresar contraseña' className='input-style' id='password' />
                             <button className='btn-form'>{ registrando ? "Regístrate" : "Inicia Sesión" }</button>
                         </form>
-                        <button className='btn-form btn-google' onClick={signInWithGoogle}>
-                            <img src={GoogleIcon} alt="Iniciar sesión con Google" className='google-icon' />
-                            <span className='google-text'>Iniciar sesión con Google</span>
-                        </button>
-                        <h4 className='text'>{registrando ? "Si ya tienes cuenta" : "No tienes cuenta"}<button className='btn-switch' onClick={()=>setRegistrando(!registrando)}>{registrando ? "Inicia sesíon" : "Regístrate"}</button> </h4>
+                        <h4 className='text-center text'>O inicia sesión con</h4>
+                        <div className='wrapper justify-content-center gap-5'>
+                            <button className='btn-form-icons btn-google' onClick={signInWithGoogle}>
+                                <img src={GoogleIcon} alt="Iniciar sesión con Google" className='google-icon' />
+                                <span className='google-text'>Iniciar sesión con Google</span>
+                            </button>
+                            <button className='btn-form-icons btn-github' onClick={signInWithGithub}>
+                                <img src={GithubIcon} alt="Iniciar sesión con Github" className='github-icon' />
+                                <span className='github-text'>Iniciar sesión con Github</span>
+                            </button>
+                        </div>
+                        <h4 className='text mt-4'>{registrando ? "Si ya tienes cuenta" : "No tienes cuenta"}<button className='btn-switch' onClick={()=>setRegistrando(!registrando)}>{registrando ? "Inicia sesíon" : "Regístrate"}</button> </h4>
                     </div>
                 </div>
             </div>
