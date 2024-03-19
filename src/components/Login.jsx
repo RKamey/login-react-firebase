@@ -21,6 +21,20 @@ export const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
+        // Validación de contraseña
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            alert("La contraseña debe tener al menos 8 caracteres, incluir al menos un número, una mayúscula y un carácter especial");
+            return;
+        }
+
+        // Validación de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Ingrese un correo electrónico válido");
+            return;
+        }
+
         if (registrando) {
             try {
                 await createUserWithEmailAndPassword(auth, email, password)
